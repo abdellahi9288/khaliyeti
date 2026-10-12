@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>خليتي | فطيرة خلية النحل</title>
+<meta name="description" content="خليتي - فطيرة خلية النحل. الأحجام والأسعار وأوقات الطلب من 4 حتى 8 مساءً. للطلب 24271730">
+<meta name="theme-color" content="#4A2617">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cg fill='%23C97F1A'%3E%3Ccircle cx='14' cy='17' r='6'/%3E%3Ccircle cx='26' cy='17' r='6'/%3E%3Ccircle cx='20' cy='12' r='6'/%3E%3Ccircle cx='20' cy='23' r='6'/%3E%3Ccircle cx='12' cy='27' r='5'/%3E%3Ccircle cx='28' cy='27' r='5'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@500;700&family=Readex+Pro:wght@300;400;600;700&display=swap">
+<style>
+/* Layout: honeycomb hero with dripping honey → size picker cells → live order-hours clock → order bar. RTL, Najdi-pattern band. */
+:root{
+  --bg:#FDF1E6; --paper:#FFFAF4; --ink:#4A2617; --ink-soft:#7A5442;
+  --honey:#E8A33A; --honey-deep:#C97F1A; --crust:#B8692A; --line:#ECD6C0;
+  --ok:#2F7D4F; --closed:#B2462E;
+  --display:"Reem Kufi","Readex Pro",Tahoma,sans-serif;
+  --body:"Readex Pro",Tahoma,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#1E120C; --paper:#2A1A11; --ink:#F7E6D3; --ink-soft:#C9A88E;
+  --honey:#F0B04C; --honey-deep:#E39A2C; --crust:#D08443; --line:#3E2a1d;
+  --ok:#5FC28A; --closed:#E77A5F; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#1E120C; --paper:#2A1A11; --ink:#F7E6D3; --ink-soft:#C9A88E;
+  --honey:#F0B04C; --honey-deep:#E39A2C; --crust:#D08443; --line:#3E2a1d;
+  --ok:#5FC28A; --closed:#E77A5F; color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.7;overflow-x:hidden}
+.wrap{max-width:1080px;margin-inline:auto;padding-inline:20px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.2}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--honey);outline-offset:3px;border-radius:8px}
+
+/* hex texture */
+.hexbg{position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='98' viewBox='0 0 56 98'%3E%3Cpath d='M28 66L0 50V17L28 1l28 16v33L28 66zm0 32L0 82V66l28 16 28-16v16L28 98z' fill='none' stroke='%23E8A33A' stroke-opacity='.18' stroke-width='1.2'/%3E%3C/svg%3E");
+  mask-image:radial-gradient(ellipse at 50% 40%,#000 30%,transparent 75%);-webkit-mask-image:radial-gradient(ellipse at 50% 40%,#000 30%,transparent 75%)}
+
+/* header */
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:10px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand b{font-family:var(--display);font-size:1.6rem;color:var(--ink)}
+.brand svg{width:40px;height:40px}
+nav.links{display:flex;gap:18px;font-size:.95rem}
+nav.links a{text-decoration:none;color:var(--ink-soft)}
+nav.links a:hover{color:var(--honey-deep)}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:99px;font-size:.85rem;font-weight:600;background:var(--paper);border:1px solid var(--line);white-space:nowrap}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--closed);box-shadow:0 0 0 0 currentColor}
+.pill.open .dot{background:var(--ok);animation:ping 1.8s infinite}
+.pill.open{color:var(--ok)} .pill.closed{color:var(--closed)}
+@keyframes ping{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--ok) 60%,transparent)}100%{box-shadow:0 0 0 10px transparent}}
+
+/* hero */
+.hero{position:relative;padding-block:48px 64px;overflow:hidden}
+.hero .wrap{position:relative;display:grid;grid-template-columns:1.1fr .9fr;gap:32px;align-items:center}
+.eyebrow{font-size:.85rem;letter-spacing:.04em;color:var(--honey-deep);font-weight:600}
+.hero h1{font-size:clamp(3.4rem,10vw,6.6rem);color:var(--ink);margin-block:6px 4px}
+.hero h1 span{display:inline-block;animation:rise .8s cubic-bezier(.2,.8,.2,1) both}
+.hero p.lede{font-size:1.15rem;color:var(--ink-soft);max-width:36ch;margin:0 0 24px}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 26px;border-radius:16px;font-family:var(--body);font-weight:700;font-size:1rem;text-decoration:none;border:0;cursor:pointer;transition:transform .2s,box-shadow .2s}
+.btn.primary{background:var(--ink);color:var(--bg);box-shadow:0 8px 0 -2px var(--honey)}
+.btn.primary:hover{transform:translateY(-3px);box-shadow:0 11px 0 -2px var(--honey)}
+.btn.ghost{background:transparent;color:var(--ink);border:2px solid var(--ink)}
+.btn.ghost:hover{background:var(--paper)}
+@keyframes rise{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+.fade{animation:rise .9s .25s cubic-bezier(.2,.8,.2,1) both}
+
+/* bun stage */
+.stage{position:relative;aspect-ratio:1;max-width:100%;width:min(420px,100%);margin-inline:auto}
+.stage .ring{position:absolute;inset:4%;border-radius:50%;border:3px solid var(--ink);opacity:.9;animation:spin 40s linear infinite;border-style:dashed}
+.stage .disc{position:absolute;inset:11%;border-radius:50%;background:radial-gradient(circle at 50% 45%,var(--paper),color-mix(in srgb,var(--honey) 25%,var(--bg)))}
+.stage svg.buns{position:absolute;inset:14%;width:72%;height:72%;overflow:visible}
+.bun{transform-box:fill-box;transform-origin:center;animation:pop .6s cubic-bezier(.3,1.6,.5,1) both}
+.drip{animation:drip 3.2s ease-in-out infinite;transform-box:fill-box;transform-origin:top}
+.drip.d2{animation-delay:1.1s}.drip.d3{animation-delay:2s}
+@keyframes pop{from{transform:scale(0)}to{transform:scale(1)}}
+@keyframes drip{0%,100%{transform:scaleY(.55)}50%{transform:scaleY(1.15)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+.dipper{position:absolute;top:-2%;left:8%;width:22%;animation:sway 3.2s ease-in-out infinite;transform-origin:80% 0}
+@keyframes sway{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(6deg)}}
+.heart{position:absolute;top:2%;right:44%;width:9%;animation:float 2.6s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-8px)}}
+
+/* najdi band */
+.band{height:28px;background:
+  linear-gradient(135deg,var(--ink) 25%,transparent 25%) -14px 0/28px 28px,
+  linear-gradient(225deg,var(--ink) 25%,transparent 25%) -14px 0/28px 28px,
+  linear-gradient(315deg,var(--ink) 25%,transparent 25%) 0 0/28px 28px,
+  linear-gradient(45deg,var(--ink) 25%,transparent 25%) 0 0/28px 28px,var(--honey);
+  animation:slide 18s linear infinite}
+@keyframes slide{to{background-position:-490px 0,-490px 0,-476px 0,-476px 0}}
+
+section{padding-block:72px}
+.head{display:flex;align-items:center;gap:16px;justify-content:center;margin-bottom:36px;text-align:center}
+.head::before,.head::after{content:"";flex:0 1 90px;height:2px;background:var(--honey)}
+.head h2{font-size:clamp(1.9rem,5vw,2.6rem)}
+.sub{text-align:center;color:var(--ink-soft);margin:-24px 0 36px}
+
+/* sizes */
+.sizes{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:end}
+.size{position:relative;background:var(--paper);border:2px solid var(--ink);border-radius:26px;padding:24px 20px 22px;text-align:center;cursor:pointer;transition:transform .35s cubic-bezier(.3,1.4,.5,1),background .3s;font:inherit;color:inherit}
+.size:hover{transform:translateY(-8px) rotate(-1deg)}
+.size[aria-pressed="true"]{background:var(--honey);color:#3A1C0F}
+.size[aria-pressed="true"] .mru,.size[aria-pressed="true"] .desc{color:#3A1C0F}
+.size .mini{height:90px;display:flex;align-items:flex-end;justify-content:center;margin-bottom:8px}
+.size .mini svg{height:100%;width:auto;transition:transform .4s}
+.size:hover .mini svg{transform:scale(1.08) rotate(6deg)}
+.size h3{font-size:1.6rem}
+.price{font-family:var(--body);font-weight:700;font-size:3.1rem;line-height:1.1;font-variant-numeric:tabular-nums;direction:ltr}
+.mru{font-weight:700;letter-spacing:.12em;font-size:.85rem;color:var(--ink-soft)}
+.desc{font-size:.85rem;color:var(--ink-soft);margin-top:6px}
+.badge{position:absolute;top:-14px;inset-inline-start:50%;transform:translateX(50%);background:var(--ink);color:var(--bg);font-size:.75rem;font-weight:600;padding:4px 12px;border-radius:99px;white-space:nowrap}
+.size.s1{min-height:300px}.size.s2{min-height:330px}.size.s3{min-height:360px}
+
+/* order builder */
+.builder{margin-top:36px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;background:var(--ink);color:var(--bg);border-radius:24px;padding:18px 24px}
+.qty{display:flex;align-items:center;gap:12px}
+.qty button{width:42px;height:42px;border-radius:12px;border:0;background:color-mix(in srgb,var(--bg) 14%,transparent);color:var(--bg);font-size:1.4rem;cursor:pointer}
+.qty button:hover{background:var(--honey);color:#3A1C0F}
+.qty output{min-width:2ch;text-align:center;font-weight:700;font-size:1.3rem;font-variant-numeric:tabular-nums}
+.total{font-size:1rem}
+.total b{font-size:1.7rem;color:var(--honey);font-variant-numeric:tabular-nums}
+.builder .btn.primary{background:var(--honey);color:#3A1C0F;box-shadow:none}
+
+/* hours */
+.hours{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center}
+.clock{position:relative;width:min(320px,100%);aspect-ratio:1;margin-inline:auto}
+.clock svg{width:100%;height:100%}
+.clock .center{position:absolute;inset:0;display:grid;place-content:center;text-align:center}
+.clock .center strong{font-size:2.3rem;font-variant-numeric:tabular-nums;direction:ltr;font-family:var(--body)}
+.clock .center small{color:var(--ink-soft)}
+.info{display:grid;gap:14px}
+.row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px;border-radius:18px;background:var(--paper);border:1px solid var(--line)}
+.row span{color:var(--ink-soft)}
+.row b{font-size:1.15rem}
+.status{font-size:1.4rem;font-family:var(--display)}
+.status.open{color:var(--ok)}.status.closed{color:var(--closed)}
+.countdown{font-variant-numeric:tabular-nums}
+
+/* contact */
+.call{position:relative;overflow:hidden;background:var(--ink);color:var(--bg);border-radius:32px;padding:44px 24px;text-align:center}
+.call .num{font-family:var(--body);font-weight:700;font-size:clamp(2.6rem,9vw,4.4rem);color:var(--honey);letter-spacing:.04em;direction:ltr;user-select:all;margin-block:8px 18px}
+.call .cta{justify-content:center}
+.call .btn.ghost{color:var(--bg);border-color:var(--bg)}
+.call .btn.ghost:hover{background:color-mix(in srgb,var(--bg) 12%,transparent)}
+.toast{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom,0px));inset-inline:0;margin-inline:auto;width:max-content;max-width:90vw;background:var(--honey);color:#3A1C0F;padding:10px 20px;border-radius:12px;font-weight:600;transform:translateY(120px);transition:transform .35s;z-index:50}
+.toast.show{transform:none}
+footer{padding-block:28px 40px;text-align:center;color:var(--ink-soft);font-size:.9rem}
+
+.reveal{transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+.reveal.pre{transform:translateY(28px)}
+
+@media (max-width:800px){
+  .hero .wrap,.hours{grid-template-columns:1fr}
+  .hero .wrap{text-align:center}
+  .hero p.lede{margin-inline:auto}
+  .cta{justify-content:center}
+  .stage{width:min(320px,100%);grid-row:1}
+  nav.links{display:none}
+  .sizes{grid-template-columns:1fr;gap:24px}
+  .size.s1,.size.s2,.size.s3{min-height:0}
+  .builder{justify-content:center;text-align:center}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="خليتي">
+      <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="none" stroke="currentColor" stroke-width="2.5" style="color:var(--ink)"/><g fill="var(--crust)"><circle cx="14" cy="17" r="5"/><circle cx="26" cy="17" r="5"/><circle cx="20" cy="13" r="5"/><circle cx="20" cy="22" r="5"/><circle cx="13" cy="25" r="4.5"/><circle cx="27" cy="25" r="4.5"/></g><path d="M20 22v9" stroke="var(--honey)" stroke-width="2.5" stroke-linecap="round"/></svg>
+      <b>خليتي</b>
+    </a>
+    <nav class="links"><a href="#menu">القائمة</a><a href="#hours">أوقات الطلب</a><a href="#order">اطلب الآن</a></nav>
+    <span class="pill closed" id="pill"><span class="dot"></span><span id="pillTxt">مغلق الآن</span></span>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="hexbg"></div>
+    <div class="wrap">
+      <div>
+        <div class="eyebrow fade">فطيرة خلية النحل · طازجة يومياً</div>
+        <h1><span>خليتي</span></h1>
+        <p class="lede fade">كرات عجين هشّة مخبوزة على شكل خلية النحل، محشية بالجبن ومغمورة بالعسل الذهبي. اختر حجمك واطلبها ساخنة.</p>
+        <div class="cta fade">
+          <a class="btn primary" href="#menu">اختر حجمك ←</a>
+          <a class="btn ghost" href="#hours">أوقات الطلب</a>
+        </div>
+      </div>
+      <div class="stage" aria-hidden="true">
+        <div class="ring"></div>
+        <div class="disc"></div>
+        <svg class="heart" viewBox="0 0 24 22"><path d="M12 21S2 14 2 7.5A5 5 0 0 1 12 5a5 5 0 0 1 10 2.5C22 14 12 21 12 21z" fill="none" stroke="var(--ink)" stroke-width="2.2"/></svg>
+        <svg class="dipper" viewBox="0 0 60 70"><rect x="28" y="0" width="5" height="26" rx="2" fill="var(--crust)"/><g fill="var(--honey)" stroke="var(--honey-deep)" stroke-width="1.5"><ellipse cx="30" cy="34" rx="16" ry="6"/><ellipse cx="30" cy="42" rx="17" ry="6"/><ellipse cx="30" cy="50" rx="15" ry="6"/></g><path class="drip" d="M30 55 q-3 8 0 14 q3-6 0-14z" fill="var(--honey)"/></svg>
+        <svg class="buns" viewBox="0 0 200 200" id="buns"></svg>
+      </div>
+    </div>
+  </section>
+
+  <div class="band" aria-hidden="true"></div>
+
+  <section id="menu">
+    <div class="wrap">
+      <div class="head reveal"><h2>الأحجام والأسعار</h2></div>
+      <p class="sub">اضغط على الحجم لإضافته إلى طلبك</p>
+      <div class="sizes" role="group" aria-label="الأحجام">
+        <button class="size s1 reveal" data-size="صغيرة" data-price="150" aria-pressed="false">
+          <div class="mini"><svg viewBox="0 0 60 60" style="height:55%"></svg></div>
+          <h3>صغيرة</h3><div class="price">150</div><div class="mru">MRU</div>
+          <div class="desc">مثالية لشخص أو شخصين</div>
+        </button>
+        <button class="size s2 reveal" data-size="متوسطة" data-price="250" aria-pressed="true">
+          <span class="badge">الأكثر طلباً</span>
+          <div class="mini"><svg viewBox="0 0 60 60" style="height:75%"></svg></div>
+          <h3>متوسطة</h3><div class="price">250</div><div class="mru">MRU</div>
+          <div class="desc">تكفي العائلة الصغيرة</div>
+        </button>
+        <button class="size s3 reveal" data-size="كبيرة" data-price="500" aria-pressed="false">
+          <div class="mini"><svg viewBox="0 0 60 60" style="height:100%"></svg></div>
+          <h3>كبيرة</h3><div class="price">500</div><div class="mru">MRU</div>
+          <div class="desc">للعزايم والجَمعات</div>
+        </button>
+      </div>
+
+      <div class="builder reveal" id="builder">
+        <div>الحجم: <b id="selName">متوسطة</b></div>
+        <div class="qty" aria-label="الكمية">
+          <button type="button" id="plus" aria-label="زيادة">+</button>
+          <output id="qty">1</output>
+          <button type="button" id="minus" aria-label="إنقاص">−</button>
+        </div>
+        <div class="total">المجموع: <b id="total">250</b> MRU</div>
+        <a class="btn primary" id="waBtn" href="#" target="_blank" rel="noopener">اطلب عبر واتساب</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="hours" style="padding-top:24px">
+    <div class="wrap">
+      <div class="head reveal"><h2>أوقات الطلب</h2></div>
+      <div class="hours">
+        <div class="clock reveal">
+          <svg viewBox="0 0 200 200" id="clockSvg"></svg>
+          <div class="center"><strong id="now">--:--</strong><small>بتوقيت نواكشوط</small></div>
+        </div>
+        <div class="info reveal">
+          <div class="row"><span>نستقبل الطلبات</span><b>يومياً</b></div>
+          <div class="row"><span>من</span><b>4:00 مساءً</b></div>
+          <div class="row"><span>حتى</span><b>8:00 مساءً</b></div>
+          <div class="row"><div class="status closed" id="status">مغلق الآن</div><span class="countdown" id="countdown"></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="order" style="padding-top:24px">
+    <div class="wrap">
+      <div class="call reveal">
+        <div class="hexbg" style="opacity:.35"></div>
+        <div style="position:relative">
+          <h2 style="font-size:clamp(1.6rem,5vw,2.2rem)">للطلب</h2>
+          <div class="num" id="num">24271730</div>
+          <div class="cta">
+            <button class="btn primary" type="button" id="copy" style="background:var(--honey);color:#3A1C0F;box-shadow:none">نسخ الرقم</button>
+            <a class="btn ghost" href="https://wa.me/22224271730" target="_blank" rel="noopener">واتساب</a>
+            <a class="btn ghost" href="tel:+22224271730">اتصال</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>© خليتي · فطيرة خلية النحل · الطلبات من 4 مساءً حتى 8 مساءً</footer>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(()=>{
+const NS='http://www.w3.org/2000/svg';
+const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+
+/* honeycomb bun cluster */
+function cluster(svg,cx,cy,r,rings,animate,drips){
+  const pts=[[0,0]];
+  if(rings>=1)for(let i=0;i<6;i++){const a=Math.PI/3*i+Math.PI/6;pts.push([Math.cos(a)*r*1.75,Math.sin(a)*r*1.75])}
+  if(rings>=2)for(let i=0;i<12;i++){const a=Math.PI/6*i;const d=i%2?r*3.03:r*3.5;pts.push([Math.cos(a)*d,Math.sin(a)*d])}
+  let defs=svg.querySelector('defs');
+  if(!defs){defs=document.createElementNS(NS,'defs');defs.innerHTML=`<radialGradient id="g${svg.id||'x'}" cx="40%" cy="35%" r="70%"><stop offset="0" stop-color="#F6C27A"/><stop offset=".55" stop-color="#D98A3D"/><stop offset="1" stop-color="#9C5420"/></radialGradient>`;svg.appendChild(defs)}
+  pts.sort((a,b)=>a[1]-b[1]);
+  pts.forEach((p,i)=>{
+    const g=document.createElementNS(NS,'g');g.setAttribute('class',animate?'bun':'');
+    if(animate)g.style.animationDelay=(0.15+i*0.07)+'s';
+    g.innerHTML=`<circle cx="${cx+p[0]}" cy="${cy+p[1]}" r="${r}" fill="url(#g${svg.id||'x'})"/>
+      <ellipse cx="${cx+p[0]-r*.3}" cy="${cy+p[1]-r*.4}" rx="${r*.35}" ry="${r*.2}" fill="#fff" opacity=".35"/>
+      <circle cx="${cx+p[0]}" cy="${cy+p[1]-r*.1}" r="${r*.18}" fill="#3A1C0F" opacity=".75"/>`;
+    svg.appendChild(g);
+  });
+  if(drips){
+    const hg=document.createElementNS(NS,'g');
+    hg.innerHTML=`<path d="M${cx-r*2.2} ${cy-r*1.2} Q${cx} ${cy-r*2.4} ${cx+r*2.2} ${cy-r*.8} Q${cx+r*1.3} ${cy+r*.6} ${cx} ${cy+r*.3} Q${cx-r*1.4} ${cy} ${cx-r*2.2} ${cy-r*1.2}z" fill="${css('--honey')}" opacity=".75"/>
+      <rect class="drip" x="${cx-3}" y="${cy+r*.2}" width="6" height="${r*2.6}" rx="3" fill="${css('--honey')}"/>
+      <rect class="drip d2" x="${cx+r*1.6}" y="${cy-r*.6}" width="5" height="${r*2.2}" rx="2.5" fill="${css('--honey')}"/>
+      <rect class="drip d3" x="${cx-r*1.9}" y="${cy-r*.4}" width="5" height="${r*1.8}" rx="2.5" fill="${css('--honey')}"/>`;
+    hg.style.animation='rise .8s 1.1s both';
+    svg.appendChild(hg);
+  }
+}
+cluster(document.getElementById('buns'),100,96,20,2,true,true);
+document.querySelectorAll('.size .mini svg').forEach((s,i)=>{s.id='m'+i;cluster(s,30,30,[9,7.5,5][i],i===0?1:2,false,false)});
+
+/* size picker */
+const sizes=[...document.querySelectorAll('.size')];
+let sel=sizes[1],qty=1;
+const fmt=n=>n.toLocaleString('en-US');
+function update(){
+  const p=+sel.dataset.price;
+  document.getElementById('selName').textContent=sel.dataset.size;
+  document.getElementById('qty').textContent=qty;
+  document.getElementById('total').textContent=fmt(p*qty);
+  const msg=`السلام عليكم، أرغب بطلب ${qty} × خليتي (${sel.dataset.size}) — المجموع ${p*qty} MRU`;
+  document.getElementById('waBtn').href='https://wa.me/22224271730?text='+encodeURIComponent(msg);
+}
+sizes.forEach(b=>b.addEventListener('click',()=>{sizes.forEach(x=>x.setAttribute('aria-pressed','false'));b.setAttribute('aria-pressed','true');sel=b;update();
+  const bd=document.getElementById('builder');bd.animate([{transform:'scale(1)'},{transform:'scale(1.03)'},{transform:'scale(1)'}],{duration:350})}));
+document.getElementById('plus').onclick=()=>{qty=Math.min(20,qty+1);update()};
+document.getElementById('minus').onclick=()=>{qty=Math.max(1,qty-1);update()};
+update();
+
+/* hours: Nouakchott = UTC+0 */
+const OPEN=16,CLOSE=20;
+const clock=document.getElementById('clockSvg');
+function arc(h1,h2,rad){const a=h=>(h/24)*2*Math.PI-Math.PI/2;const x1=100+rad*Math.cos(a(h1)),y1=100+rad*Math.sin(a(h1)),x2=100+rad*Math.cos(a(h2)),y2=100+rad*Math.sin(a(h2));return `M${x1} ${y1} A${rad} ${rad} 0 0 1 ${x2} ${y2}`}
+let ticks='';for(let h=0;h<24;h++){const a=(h/24)*2*Math.PI-Math.PI/2,r1=h%6?84:80;ticks+=`<line x1="${100+r1*Math.cos(a)}" y1="${100+r1*Math.sin(a)}" x2="${100+88*Math.cos(a)}" y2="${100+88*Math.sin(a)}" stroke="var(--ink-soft)" stroke-width="${h%6?1:2}"/>`}
+const lbl=(h,t)=>{const a=(h/24)*2*Math.PI-Math.PI/2;return `<text x="${100+70*Math.cos(a)}" y="${100+70*Math.sin(a)+4}" text-anchor="middle" font-size="10" fill="var(--ink-soft)" font-family="Readex Pro,sans-serif">${t}</text>`};
+clock.innerHTML=`<circle cx="100" cy="100" r="94" fill="var(--paper)" stroke="var(--line)" stroke-width="2"/>
+<path d="${arc(OPEN,CLOSE,94)}" stroke="var(--honey)" stroke-width="12" fill="none" stroke-linecap="round"/>
+${ticks}${lbl(0,'12ص')}${lbl(6,'6ص')}${lbl(12,'12م')}${lbl(18,'6م')}
+<line id="hand" x1="100" y1="44" x2="100" y2="12" stroke="var(--ink)" stroke-width="4" stroke-linecap="round" style="transform-origin:100px 100px;transition:transform 1s"/>
+`;
+function tick(){
+  const d=new Date(),h=d.getUTCHours(),m=d.getUTCMinutes(),s=d.getUTCSeconds();
+  const t=h+m/60+s/3600,open=t>=OPEN&&t<CLOSE;
+  document.getElementById('now').textContent=`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
+  document.getElementById('hand').style.transform=`rotate(${t/24*360}deg)`;
+  const st=document.getElementById('status'),pill=document.getElementById('pill');
+  st.textContent=open?'مفتوح الآن':'مغلق الآن';st.className='status '+(open?'open':'closed');
+  pill.className='pill '+(open?'open':'closed');document.getElementById('pillTxt').textContent=open?'نستقبل الطلبات':'مغلق الآن';
+  let target=open?CLOSE:(t<OPEN?OPEN:OPEN+24),left=Math.max(0,Math.round((target-t)*60));
+  const hh=Math.floor(left/60),mm=left%60;
+  const span=(hh?hh+' س ':'')+mm+' د';
+  document.getElementById('countdown').textContent=open?`يغلق بعد ${span}`:`يفتح بعد ${span}`;
+}
+tick();setInterval(tick,15000);
+
+/* copy */
+const toast=(m)=>{const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2000)};
+document.getElementById('copy').onclick=()=>{
+  const n='24271730';
+  const fallback=()=>{const r=document.createRange();r.selectNodeContents(document.getElementById('num'));const s=getSelection();s.removeAllRanges();s.addRange(r);toast('حدّد الرقم، انسخه يدوياً')};
+  try{navigator.clipboard.writeText(n).then(()=>toast('تم نسخ الرقم'),fallback)}catch(e){fallback()}
+};
+
+/* reveal on scroll (content visible at rest; only slides) */
+const els=[...document.querySelectorAll('.reveal')];
+if('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion:reduce)').matches){
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.remove('pre');io.unobserve(e.target)}}),{threshold:.15});
+  els.forEach(el=>{const r=el.getBoundingClientRect();if(r.top>innerHeight){el.classList.add('pre');io.observe(el)}});
+}
+})();
+</script>
+</body>
+</html>
