@@ -119,6 +119,21 @@ section{padding-block:72px}
 .badge{position:absolute;top:-14px;inset-inline-start:50%;transform:translateX(50%);background:var(--ink);color:var(--bg);font-size:.75rem;font-weight:600;padding:4px 12px;border-radius:99px;white-space:nowrap}
 .size.s1{min-height:300px}.size.s2{min-height:330px}.size.s3{min-height:360px}
 
+/* flavors */
+.flabel{font-size:1.5rem;text-align:center;margin:52px 0 20px}
+.flavors{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.flavor{display:flex;align-items:center;gap:14px;padding:14px 18px;border-radius:20px;border:2px solid var(--line);background:var(--paper);color:inherit;font:inherit;cursor:pointer;text-align:start;transition:border-color .25s,transform .3s cubic-bezier(.3,1.4,.5,1)}
+.flavor:hover{transform:translateY(-4px)}
+.flavor[aria-pressed="true"]{border-color:var(--ink);box-shadow:0 6px 0 -1px var(--fc)}
+.flavor .sw{position:relative;flex:none;width:58px;height:58px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#F6C27A,#D98A3D 60%,#9C5420);overflow:hidden}
+.flavor .sw::before{content:"";position:absolute;inset:-10% -10% 45% -10%;background:var(--fc);border-radius:0 0 45% 55%;transition:inset .5s}
+.flavor .sw::after{content:"";position:absolute;top:50%;left:42%;width:7px;height:16px;border-radius:4px;background:var(--fc);transform-origin:top;animation:drip 2.6s ease-in-out infinite}
+.flavor[aria-pressed="true"] .sw::before{inset:-10% -10% 30% -10%}
+.flavor b{display:block;font-family:var(--display);font-size:1.35rem;line-height:1.2}
+.flavor small{color:var(--ink-soft);font-size:.85rem}
+.flavor .chk{margin-inline-start:auto;width:24px;height:24px;border-radius:50%;border:2px solid var(--line);display:grid;place-content:center;font-size:.8rem;color:transparent;flex:none}
+.flavor[aria-pressed="true"] .chk{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+
 /* order builder */
 .builder{margin-top:36px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;background:var(--ink);color:var(--bg);border-radius:24px;padding:18px 24px}
 .qty{display:flex;align-items:center;gap:12px}
@@ -165,6 +180,7 @@ footer{padding-block:28px 40px;text-align:center;color:var(--ink-soft);font-size
   .stage{width:min(320px,100%);grid-row:1}
   nav.links{display:none}
   .sizes{grid-template-columns:1fr;gap:24px}
+  .flavors{grid-template-columns:1fr}
   .size.s1,.size.s2,.size.s3{min-height:0}
   .builder{justify-content:center;text-align:center}
 }
@@ -179,7 +195,7 @@ footer{padding-block:28px 40px;text-align:center;color:var(--ink-soft);font-size
       <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="none" stroke="currentColor" stroke-width="2.5" style="color:var(--ink)"/><g fill="var(--crust)"><circle cx="14" cy="17" r="5"/><circle cx="26" cy="17" r="5"/><circle cx="20" cy="13" r="5"/><circle cx="20" cy="22" r="5"/><circle cx="13" cy="25" r="4.5"/><circle cx="27" cy="25" r="4.5"/></g><path d="M20 22v9" stroke="var(--honey)" stroke-width="2.5" stroke-linecap="round"/></svg>
       <b>خليتي</b>
     </a>
-    <nav class="links"><a href="#menu">القائمة</a><a href="#hours">أوقات الطلب</a><a href="#order">اطلب الآن</a></nav>
+    <nav class="links"><a href="#menu">القائمة</a><a href="#flavors">النكهات</a><a href="#hours">أوقات الطلب</a><a href="#order">اطلب الآن</a></nav>
     <span class="pill closed" id="pill"><span class="dot"></span><span id="pillTxt">مغلق الآن</span></span>
   </div>
 </header>
@@ -191,7 +207,7 @@ footer{padding-block:28px 40px;text-align:center;color:var(--ink-soft);font-size
       <div>
         <div class="eyebrow fade">فطيرة خلية النحل · طازجة يومياً</div>
         <h1><span>خليتي</span></h1>
-        <p class="lede fade">كرات عجين هشّة مخبوزة على شكل خلية النحل، محشية بالجبن ومغمورة بالعسل الذهبي. اختر حجمك واطلبها ساخنة.</p>
+        <p class="lede fade">كرات عجين هشّة مخبوزة على شكل خلية النحل، مغمورة بالنكهة التي تحبها: عسل أو شوكولاته أو نستله. اختر حجمك واطلبها ساخنة.</p>
         <div class="cta fade">
           <a class="btn primary" href="#menu">اختر حجمك ←</a>
           <a class="btn ghost" href="#hours">أوقات الطلب</a>
@@ -232,8 +248,24 @@ footer{padding-block:28px 40px;text-align:center;color:var(--ink-soft);font-size
         </button>
       </div>
 
+      <h3 class="flabel reveal" id="flavors">اختر النكهة</h3>
+      <div class="flavors" role="group" aria-label="النكهات">
+        <button class="flavor reveal" data-flavor="نستله" aria-pressed="false" style="--fc:#F3E6CF">
+          <span class="sw" aria-hidden="true"></span>
+          <span><b>نستله</b><small>صوص الحليب المكثّف الكريمي</small></span><span class="chk" aria-hidden="true">✓</span>
+        </button>
+        <button class="flavor reveal" data-flavor="شوكولاته" aria-pressed="false" style="--fc:#5A2E1A">
+          <span class="sw" aria-hidden="true"></span>
+          <span><b>شوكولاته</b><small>صوص شوكولاته غني ودافئ</small></span><span class="chk" aria-hidden="true">✓</span>
+        </button>
+        <button class="flavor reveal" data-flavor="عسل" aria-pressed="true" style="--fc:#E8A33A">
+          <span class="sw" aria-hidden="true"></span>
+          <span><b>عسل</b><small>العسل الذهبي الأصلي</small></span><span class="chk" aria-hidden="true">✓</span>
+        </button>
+      </div>
+
       <div class="builder reveal" id="builder">
-        <div>الحجم: <b id="selName">متوسطة</b></div>
+        <div>الحجم: <b id="selName">متوسطة</b> · النكهة: <b id="selFlavor">عسل</b></div>
         <div class="qty" aria-label="الكمية">
           <button type="button" id="plus" aria-label="زيادة">+</button>
           <output id="qty">1</output>
@@ -321,17 +353,21 @@ document.querySelectorAll('.size .mini svg').forEach((s,i)=>{s.id='m'+i;cluster(
 /* size picker */
 const sizes=[...document.querySelectorAll('.size')];
 let sel=sizes[1],qty=1;
+const flavors=[...document.querySelectorAll('.flavor')];let flav=flavors[2];
 const fmt=n=>n.toLocaleString('en-US');
 function update(){
   const p=+sel.dataset.price;
   document.getElementById('selName').textContent=sel.dataset.size;
+  document.getElementById('selFlavor').textContent=flav.dataset.flavor;
   document.getElementById('qty').textContent=qty;
   document.getElementById('total').textContent=fmt(p*qty);
-  const msg=`السلام عليكم، أرغب بطلب ${qty} × خليتي (${sel.dataset.size}) — المجموع ${p*qty} MRU`;
+  const msg=`السلام عليكم، أرغب بطلب ${qty} × خليتي (${sel.dataset.size}) بنكهة ${flav.dataset.flavor} — المجموع ${p*qty} MRU`;
   document.getElementById('waBtn').href='https://wa.me/22224271730?text='+encodeURIComponent(msg);
 }
 sizes.forEach(b=>b.addEventListener('click',()=>{sizes.forEach(x=>x.setAttribute('aria-pressed','false'));b.setAttribute('aria-pressed','true');sel=b;update();
   const bd=document.getElementById('builder');bd.animate([{transform:'scale(1)'},{transform:'scale(1.03)'},{transform:'scale(1)'}],{duration:350})}));
+flavors.forEach(b=>b.addEventListener('click',()=>{flavors.forEach(x=>x.setAttribute('aria-pressed','false'));b.setAttribute('aria-pressed','true');flav=b;update();
+  document.getElementById('builder').animate([{transform:'scale(1)'},{transform:'scale(1.03)'},{transform:'scale(1)'}],{duration:350})}));
 document.getElementById('plus').onclick=()=>{qty=Math.min(20,qty+1);update()};
 document.getElementById('minus').onclick=()=>{qty=Math.max(1,qty-1);update()};
 update();
